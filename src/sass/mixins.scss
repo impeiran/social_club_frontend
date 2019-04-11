@@ -1,0 +1,29 @@
+@import './variable.scss';
+
+@mixin round-shadow-card {
+  background: #FFF;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+  border-radius: 4px;
+  // overflow: hidden;
+}
+
+@mixin wrap-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@mixin hover-theme-color {
+  cursor: pointer;
+  &:hover {
+    color: $themeColor;
+  }
+}
+
+@mixin clearFix {
+  &::after {
+    display: block;
+    content: '';
+    clear: both;
+  }
+}
