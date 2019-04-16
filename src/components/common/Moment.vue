@@ -226,10 +226,7 @@ export default {
                 v-for="(item, index) in data.images"
                 :key="index"
                 :class="data.images.length > 1 ? 'normal' : 'single'">
-              <img
-                :src="item"
-                :ref="'photos' + index"
-                @load="e => photosAdapter(e, index)" />
+              <img v-lazy="item"/>
             </div>
           </viewer>
         </div>
@@ -373,9 +370,14 @@ export default {
             object-fit: cover;
           }
         }
+        .media-img.single {
+          img {
+            max-height: 160px;
+            max-width: 370px;
+          }
+
+        }
         img {
-          opacity: 0;
-          transition: all .4s;
           cursor: zoom-in;
         }
       }
