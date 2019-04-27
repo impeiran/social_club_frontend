@@ -169,7 +169,6 @@ export default {
   mounted () {
     this.initUserInfo()
     this.loadResults()
-
     this.$watch('$route.query.id', newVal => {
       this.navFlag = 'totalMoments'
       this.userId = newVal || this.authUserInfo.id

@@ -30,7 +30,7 @@ export default async (to, from, next) => {
   const userToken = LS.getItem('userToken') || ''
   if (userToken) {
     const sdk = new SDK()
-    sdk.quickLogin().then(res => {
+    await sdk.quickLogin().then(res => {
       const data = res.data.data
       initStoreInfo(data)
       webSocket.connect()

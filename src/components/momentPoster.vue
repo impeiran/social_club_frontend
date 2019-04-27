@@ -4,6 +4,8 @@ import SDK from '../utils/socialSDK.js'
 import mixin from '../mixin.js'
 import { mapState, mapMutations } from 'vuex'
 
+const VIDEO_SIZE_LIMIT = 20 * 1024 * 1024
+
 export default {
   mixins: [mixin],
   data () {
@@ -92,8 +94,13 @@ export default {
 
     videoHandler (e) {
       const handler = () => {
-        this.videoFile = e.target.files[0]
-        this.previewVideo = e.target.files[0].name
+        const videoFile = e.target.files[0]
+        if (videoFile.size > VIDEO_SIZE_LIMIT) {
+          this.$alert('只能上传小于20M的视频', { type: 'warning', lockScroll: false })
+          return
+        }
+        this.videoFile = videoFile
+        this.previewVideo = videoFile.name
       }
       if (this.photosFileList.length) {
         this.$confirm('视频/图片只能二选一，请问要放弃已选择的图片吗？')

@@ -2,6 +2,8 @@
 import SDK from '../../utils/socialSDK.js'
 import { mapState, mapMutations } from 'vuex'
 
+const AVATAR_SIZE_LIMIT = 500 * 1024
+
 export default {
   data () {
     return {
@@ -34,21 +36,29 @@ export default {
       formData.append('nickname', nickname)
       this.avatarFile && formData.append('avatar', this.avatarFile)
       sdk.editUserInfo(formData).then(res => {
-        const data = res.data.data
-        const currentUserInfo = {
-          nickname: data.nickname,
-          avatar: data.avatar,
-          desc: data.desc,
-          sex: data.sex,
-          created_at: data.created_at,
-          id: data._id
+        if (res.data.success) {
+          const data = res.data.data
+          const currentUserInfo = {
+            nickname: data.nickname,
+            avatar: data.avatar,
+            desc: data.desc,
+            sex: data.sex,
+            created_at: data.created_at,
+            id: data._id
+          }
+          this.SET_USER_INFO(currentUserInfo)
+          this.$message({message: '编辑成功', type: 'success'})
+        } else {
+          this.$alert(res.data.msg, { type: 'error', lockScroll: false })
         }
-        this.SET_USER_INFO(currentUserInfo)
-        this.$message({message: '编辑成功', type: 'success'})
       })
     },
 
     avatarHandler (file) {
+      if (file.raw.size > AVATAR_SIZE_LIMIT) {
+        this.$alert('头像大小超出限制500kb', { type: 'warning', lockScroll: false })
+        return
+      }
       this.avatarReader.readAsDataURL(file.raw)
       this.avatarFile = file.raw
     },
