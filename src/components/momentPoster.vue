@@ -169,6 +169,10 @@ export default {
 <template>
   <div class="moment-poster" v-loading="postMomentLoading">
     <ul class="tool-bar">
+      <li class="tool-item" @click="() => { this.content += '@用户昵称 ' }">
+        <i class="fa fa-at"></i>
+        <span>提及</span>
+      </li>
       <li class="tool-item" @click="() => { this.content += '#在此输入话题# ' }">
         <i class="fa fa-hashtag"></i>
         <span>话题</span>
