@@ -121,7 +121,9 @@ export default {
   <section class="social-home-page">
 
     <div class="left-side">
-      <date-widget />
+      <keep-alive>
+        <date-widget />
+      </keep-alive>
 
       <el-menu class="home-menu"
                :default-active="menuFlag"
@@ -133,7 +135,9 @@ export default {
     </div>
 
     <div class="middle-side">
-      <moment-poster @needRefreshMoment="afterPostMoment" />
+      <keep-alive>
+        <moment-poster @needRefreshMoment="afterPostMoment" />
+      </keep-alive>
       <Loading :loading.sync="!moments.length && momentLoading"></Loading>
       <div class="moment-wrapper" >
         <ClickMore

@@ -1,7 +1,7 @@
 import store from './store'
 
 const LS = localStorage || window.localStorage
-const WS_API = 'ws://localhost:9009'
+const WS_API = 'ws://111.230.157.91:9009'
 
 let WebServer
 

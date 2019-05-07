@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const apiDomain = 'http://localhost:9002/api'
+const apiDomain = process.env.NODE_ENV === 'production' ? '/social_club/api' : 'http://111.230.157.91/social_club/api'
+
+console.log()
 
 export default class SDK {
   constructor () {

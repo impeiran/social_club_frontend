@@ -76,6 +76,7 @@ export default {
             this.previewPhotos.push(e.target.result)
           }
         })
+        this.$refs.photosInputer.value = ''
       }
       if (this.videoFile) {
         this.$confirm('视频/图片只能二选一，请问要放弃已选择的视频吗？', {
@@ -95,12 +96,14 @@ export default {
     videoHandler (e) {
       const handler = () => {
         const videoFile = e.target.files[0]
+        console.log(videoFile.size, VIDEO_SIZE_LIMIT)
         if (videoFile.size > VIDEO_SIZE_LIMIT) {
           this.$alert('只能上传小于20M的视频', { type: 'warning', lockScroll: false })
           return
         }
         this.videoFile = videoFile
         this.previewVideo = videoFile.name
+        this.$refs.videoInputer.value = ''
       }
       if (this.photosFileList.length) {
         this.$confirm('视频/图片只能二选一，请问要放弃已选择的图片吗？')

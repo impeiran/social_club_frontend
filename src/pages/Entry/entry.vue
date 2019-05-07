@@ -9,7 +9,7 @@ export default {
   data () {
     return {
       flag: 'login',
-      captchaUrl: 'http://localhost:9002/social_captcha',
+      captchaUrl: 'http://www.impeiran.com/social_club/api/social_captcha',
       loginData: {
         account: '',
         password: '',
@@ -49,7 +49,7 @@ export default {
     },
 
     changeCaptchaUrl () {
-      this.captchaUrl = 'http://localhost:9002/social_captcha?t=' + new Date().getTime()
+      this.captchaUrl = 'http://www.impeiran.com/social_club/api/social_captcha?t=' + new Date().getTime()
     },
 
     goLogin () {
@@ -57,13 +57,13 @@ export default {
       this.$refs.loginInputElem.blur()
 
       if (!account) {
-        this.$alert('账号不能为空')
+        this.$alert('账号不能为空', { type: 'warning', lockScroll: false })
         return
       } else if (!password) {
-        this.$alert('密码不能为空')
+        this.$alert('密码不能为空', { type: 'warning', lockScroll: false })
         return
       } else if (!captcha) {
-        this.$alert('缺少验证码')
+        this.$alert('缺少验证码', { type: 'warning', lockScroll: false })
         return
       }
 
@@ -91,8 +91,11 @@ export default {
           this.$message({ message: '登陆成功！', type: 'success' })
           this.$router.push('/')
         } else {
-          this.$alert(res.data.msg, { type: 'error' })
+          this.$alert(res.data.msg, { type: 'error', lockScroll: false })
         }
+        loginLoading.close()
+      }).catch(err => {
+        this.$alert(err, { type: 'error', lockScroll: false })
         loginLoading.close()
       })
     },
@@ -101,22 +104,22 @@ export default {
       const { nickname, sex, account, password, duplicatePassword, captcha } = this.signUpData
       this.$refs.signUpInputElem.blur()
       if (!nickname) {
-        this.$alert('昵称不能为空')
+        this.$alert('昵称不能为空', { type: 'warning', lockScroll: false })
         return
       } else if (!sex) {
-        this.$alert('请选择性别')
+        this.$alert('请选择性别', { type: 'warning', lockScroll: false })
         return
       } else if (!account) {
-        this.$alert('账号不能为空')
+        this.$alert('账号不能为空', { type: 'warning', lockScroll: false })
         return
       } else if (!password || !duplicatePassword) {
-        this.$alert('密码不能为空')
+        this.$alert('密码不能为空', { type: 'warning', lockScroll: false })
         return
       } else if (password !== duplicatePassword) {
-        this.$alert('两次密码不一样 请重新输入')
+        this.$alert('两次密码不一样 请重新输入', { type: 'warning', lockScroll: false })
         return
       } else if (!captcha) {
-        this.$alert('缺少验证码')
+        this.$alert('缺少验证码', { type: 'warning', lockScroll: false })
         return
       }
 
@@ -127,13 +130,16 @@ export default {
         if (res.data.success) {
           LS.setItem('userToken', res.data.data.token)
           signUpLoading.close()
-          this.$confirm('注册成功，是否跳转登陆')
+          this.$confirm('注册成功，是否跳转登陆', { type: 'success', lockScroll: false })
             .then(() => {
               this.$router.push('/')
             })
         } else {
-          this.$alert(res.data.msg, { type: 'error' })
+          this.$alert(res.data.msg, { type: 'error', lockScroll: false })
         }
+        signUpLoading.close()
+      }).catch(err => {
+        this.$alert(err.msg, { type: 'error', lockScroll: false })
         signUpLoading.close()
       })
     }
