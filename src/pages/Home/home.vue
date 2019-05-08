@@ -4,6 +4,7 @@ import momentPoster from '../../components/momentPoster'
 import userWidget from '../../components/userWidget'
 import trendingList from '../../components/trendingList'
 import Moment from '../../components/common/Moment'
+import backToTop from '../../components/common/backToTop'
 import Loading from '../../components/common/Loading'
 import ClickMore from '../../components/common/ClickMore'
 import mixin from '../../mixin.js'
@@ -16,7 +17,7 @@ export default {
   name: 'Home',
 
   components: {
-    userWidget, trendingList, momentPoster, dateWidget, Moment, ClickMore, Loading
+    userWidget, trendingList, momentPoster, dateWidget, Moment, ClickMore, Loading, backToTop
   },
 
   data () {
@@ -152,6 +153,7 @@ export default {
               @delete="deleteMoment(item._id, index)" />
         </ClickMore>
       </div>
+
     </div>
 
     <div class="right-side">
@@ -159,6 +161,7 @@ export default {
       <trending-list :data="trendingListData" @refresh="getTrendingList" />
     </div>
 
+    <back-to-top class="backTop"></back-to-top>
   </section>
 </template>
 
@@ -169,6 +172,7 @@ export default {
   display: flex;
   margin: 0 auto;
   width: 1120px;
+  position: relative;
 
   .left-side {
     margin: 10px;
@@ -199,6 +203,12 @@ export default {
   .right-side {
     margin: 10px;
     width: 250px;
+  }
+
+  .backTop {
+    position: fixed;
+    bottom: 70px;
+    right: 70px;
   }
 }
 

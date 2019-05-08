@@ -8,7 +8,10 @@ export default {
     return {
       keyword: '',
       searchFlag: '',
-      inputFocus: false
+      inputFocus: false,
+
+      popDownHeader: false,
+      lastY: 0
     }
   },
 
@@ -65,13 +68,22 @@ export default {
     }
   },
 
-  created () {
+  mounted () {
+    window.addEventListener('scroll', e => {
+      if (document.documentElement.scrollTop > 600) {
+        this.popDownHeader = true
+      } else {
+        this.popDownHeader = false
+      }
+    })
   }
 }
 </script>
 
 <template>
-  <section class="social-header" v-show="!hideHeader">
+  <section class="social-header"
+           :class="{'popDown': popDownHeader}"
+           v-show="!hideHeader">
     <div class="wrapper">
 
       <router-link to="/">
@@ -121,8 +133,6 @@ export default {
   width: 100%;
   height: 69px;
   background: $themeColor;
-  border-bottom: 1px solid #eee;
-  box-shadow: 0 0 4px #eee;
 
   .wrapper {
     display: flex;
@@ -185,6 +195,23 @@ export default {
       }
     }
   }
+}
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -70px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.popDown {
+  position: fixed;
+  /* top: -70px; */
+  animation: slideDown .6s ease-in-out;
+  z-index: 1000;
 }
 
 </style>
