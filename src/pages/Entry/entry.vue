@@ -173,10 +173,11 @@ export default {
                   v-model="loginData.account" />
         <el-input type="password" placeholder="请输入你的密码" prefix-icon="el-icon-setting" class="inputBox"
                   v-model="loginData.password"
-                  ref="loginInputElem"/>
+                  />
         <div class="inputBox captcha-box" key="signUpCaptchaBox">
           <el-input type="text" placeholder="验证码" prefix-icon="el-icon-setting" class="captcha-el" maxlength="4"
                   v-model="loginData.captcha"
+                  ref="loginInputElem"
                   @keyup.enter.native="goLogin"/>
           <img :src="captchaUrl" @click="changeCaptchaUrl">
         </div>
@@ -196,10 +197,11 @@ export default {
                   v-model="signUpData.password" />
         <el-input type="password" placeholder="请再次输入注册密码" prefix-icon="el-icon-setting" class="inputBox"
                   v-model="signUpData.duplicatePassword"
-                  ref="signUpInputElem"/>
+                  />
         <div class="inputBox captcha-box" key="signUpCaptchaBox">
           <el-input type="text" placeholder="验证码" prefix-icon="el-icon-setting" class="captcha-el" maxlength="4"
                   v-model="signUpData.captcha"
+                  ref="signUpInputElem"
                   @keyup.enter.native="goSignUp"/>
           <img :src="captchaUrl" @click="changeCaptchaUrl">
         </div>
