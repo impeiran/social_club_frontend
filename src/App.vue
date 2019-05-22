@@ -2,7 +2,9 @@
   <div id="app">
     <Header></Header>
     <main class="social-body">
-      <router-view/>
+      <transition name="slidePop" mode="out-in">
+        <router-view/>
+      </transition>
     </main>
     <Sider></Sider>
     <Footer></Footer>
@@ -40,5 +42,18 @@ export default {
   .fade-enter-active, .fade-leave-active{
     transition: all .2s;
   }
+}
+
+.slidePop-enter-active,
+.slidePop-leave-active {
+  transition: all .2s ease;
+}
+
+.slidePop-enter {
+  opacity: 0;
+}
+.slidePop-leave-to {
+  opacity: 0;
+  transform: translate3d(0, 30px, 0);
 }
 </style>

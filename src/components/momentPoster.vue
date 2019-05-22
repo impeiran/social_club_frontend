@@ -170,7 +170,7 @@ export default {
 </script>
 
 <template>
-  <div class="moment-poster" v-loading="postMomentLoading">
+  <div class="moment-poster" v-loading="postMomentLoading" element-loading-text="发表中...">
     <ul class="tool-bar">
       <li class="tool-item" @click="() => { this.content += '@用户昵称 ' }">
         <i class="fa fa-at"></i>

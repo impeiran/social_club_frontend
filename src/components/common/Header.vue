@@ -69,20 +69,20 @@ export default {
   },
 
   mounted () {
-    window.addEventListener('scroll', e => {
-      if (document.documentElement.scrollTop > 600) {
-        this.popDownHeader = true
-      } else {
-        this.popDownHeader = false
-      }
-    })
+    // window.addEventListener('scroll', e => {
+    //   if (document.documentElement.scrollTop > 600) {
+    //     this.popDownHeader = true
+    //   } else {
+    //     this.popDownHeader = false
+    //   }
+    // })
   }
 }
 </script>
 
 <template>
   <section class="social-header"
-           :class="{'popDown': popDownHeader}"
+           :class="{'popDown': false && popDownHeader}"
            v-show="!hideHeader">
     <div class="wrapper">
 
@@ -137,9 +137,10 @@ export default {
   .wrapper {
     display: flex;
     align-items: center;
+    height: 100%;
     position: relative;
     margin: 0 auto;
-    width: 1280px;
+    width: 1100px;
 
     h1 {
       font-style: italic;
@@ -151,7 +152,7 @@ export default {
 
     .inputBox {
       position: relative;
-      margin: 0 20px 0 80px;
+      margin: 0 20px 0 118px;
       transition: all .3s;
       /deep/ input {
         border-radius: 40px !important;
